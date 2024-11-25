@@ -9,8 +9,8 @@ pygame.init()
 cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 one_deck = 4 * cards
 decks = 4
-WIDTH = 600
-HEIGHT = 800
+WIDTH = 800
+HEIGHT = 900
 screen = pygame.display.set_mode([WIDTH, HEIGHT])
 pygame.display.set_caption('Blackjack')
 fps = 60
@@ -55,7 +55,7 @@ def draw_cards(player, dealer, reveal):
         pygame.draw.rect(screen, 'white', [70 + (70 * i), 460 + (5 * i), 120, 220], 0, 5)
         screen.blit(font.render(player[i], True, 'black'), (75 + 70 * i, 465 + 5 * i))
         screen.blit(font.render(player[i], True, 'black'), (75 + 70 * i, 635 + 5 * i))
-        pygame.draw.rect(screen, 'red', [70 + (70 * i), 460 + (5 * i), 120, 220], 5, 5)
+        pygame.draw.rect(screen, '#d36e70', [70 + (70 * i), 460 + (5 * i), 120, 220], 5, 5)
 
     # Si el jugador no ha terminado su turno, la banca esconderá una carta
     for i in range(len(dealer)):
@@ -66,7 +66,7 @@ def draw_cards(player, dealer, reveal):
         else:
             screen.blit(font.render('???', True, 'black'), (75 + 70 * i, 165 + 5 * i))
             screen.blit(font.render('???', True, 'black'), (75 + 70 * i, 335 + 5 * i))
-        pygame.draw.rect(screen, 'blue', [70 + (70 * i), 160 + (5 * i), 120, 220], 5, 5)
+        pygame.draw.rect(screen, '#7fb5b5', [70 + (70 * i), 160 + (5 * i), 120, 220], 5, 5)
 
 
 # Pasar en la mano del jugador o de la banca y obtener la mejor puntuación posible
@@ -98,31 +98,31 @@ def draw_game(act, record, result):
     button_list = []
     # Inicialmente al arrancar (no activo) la única opción es repartir nueva mano
     if not act:
-        deal = pygame.draw.rect(screen, 'white', [150, 20, 300, 100], 0, 5)
-        pygame.draw.rect(screen, 'green', [150, 20, 300, 100], 3, 5)
-        deal_text = font.render('Repartir', True, 'black')
+        deal = pygame.draw.rect(screen, 'black', [150, 20, 300, 100], 0, 5)
+        pygame.draw.rect(screen, 'white', [150, 20, 300, 100], 3, 5)
+        deal_text = font.render('Repartir', True, 'white')
         screen.blit(deal_text, (165, 50))
         button_list.append(deal)
     # Una vez iniciado el juego, botones de disparo y parada y registros de victorias/derrotas
     else:
-        hit = pygame.draw.rect(screen, 'white', [0, 700, 300, 100], 0, 5)
-        pygame.draw.rect(screen, 'green', [0, 700, 300, 100], 3, 5)
-        hit_text = font.render('Pedir', True, 'black')
+        hit = pygame.draw.rect(screen, 'black', [0, 700, 300, 100], 0, 5)
+        pygame.draw.rect(screen, 'white', [0, 700, 300, 100], 3, 5)
+        hit_text = font.render('Pedir', True, 'white')
         screen.blit(hit_text, (55, 735))
         button_list.append(hit)
-        stand = pygame.draw.rect(screen, 'white', [300, 700, 300, 100], 0, 5)
-        pygame.draw.rect(screen, 'green', [300, 700, 300, 100], 3, 5)
-        stand_text = font.render('Quedarse', True, 'black')
+        stand = pygame.draw.rect(screen, 'black', [300, 700, 300, 100], 0, 5)
+        pygame.draw.rect(screen, 'white', [300, 700, 300, 100], 3, 5)
+        stand_text = font.render('Quedarse', True, 'white')
         screen.blit(stand_text, (355, 735))
         button_list.append(stand)
-        score_text = smaller_font.render(f'Wins: {record[0]}   Losses: {record[1]}   Draws: {record[2]}', True, 'white')
+        score_text = smaller_font.render(f'Ganadas: {record[0]}   Perdidas: {record[1]}   Empate: {record[2]}', True, 'white')
         screen.blit(score_text, (15, 840))
     # Si hay un resultado para la mano que se ha jugado, mostrar un botón de reinicio e informar al usuario de lo sucedido
     if result != 0:
         screen.blit(font.render(results[result], True, 'white'), (15, 25))
         deal = pygame.draw.rect(screen, 'white', [150, 220, 300, 100], 0, 5)
-        pygame.draw.rect(screen, 'green', [150, 220, 300, 100], 3, 5)
-        pygame.draw.rect(screen, 'black', [153, 223, 294, 94], 3, 5)
+        pygame.draw.rect(screen, '#89d07e', [150, 220, 300, 100], 5, 6)
+        #pygame.draw.rect(screen, 'white', [153, 223, 294, 94], 3, 6)
         deal_text = font.render('Nueva Mano', True, 'black')
         screen.blit(deal_text, (165, 250))
         button_list.append(deal)
